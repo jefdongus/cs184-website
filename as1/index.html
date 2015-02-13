@@ -13,22 +13,60 @@ Created by <a href="http://www-inst.eecs.berkeley.edu/~cs184-ah">Jeffrey Dong</a
 Click on the pictures for a larger image.
 </p>
 
-<p>Diffuse only: </p>
+<p>Diffuse only: 
+-kd 1 1 1 -dl -1 -1 -1 1 1 1</p>
 <a href="diffuse.jpg"><img width="200" height="200" src="diffuse.jpg" /></a>
 
-
+<p>Specular only (directional light source): 
+-ks 1 1 1 -sp 8 -dl -1 -1 -1 1 1 1</p>
 <a href="spec_dl.jpg"><img widht="200" height="200" src="spec_dl.jpg" /></a>
+
+<p>Specular only (point light source):
+-ks 1 1 1 -sp 8 -pl 1 1 1 1 1 1</p>
 <a href="spec_pl.jpg"><img width="200" height="200" src="spec_pl.jpg" /></a>
+
+<p>Combined specular and diffuse shading:
+-kd 1 1 1 -dl -1 -1 -1 1 1 1</p>
 <a href="diff_spec.jpg"><img widht="200" height="200" src="diff_spec.jpg" /></a>
+
+<p>Combined specular, diffuse, and ambient
+-kd 1 1 1 -dl -1 -1 -1 1 1 1</p>
 <a href="diff_spec_amb.jpg"><img width="200" height="200" src="diff_spec_amb.jpg" /></a>
+
+<p>Multiple light sources:
+-ka 0.05 0.05 0.05 -kd 0.8 0.8 0.8 -ks 1 1 1 -sp 64 -pl 2 2 2 1 1 0 -pl -2 2 2 0 1 1 -pl 0 -2 2 1 0 1</p>
 <a href="multicolor.jpg"><img widht="200" height="200" src="multicolor.jpg" /></a>
+
+<p>Toon shader (with modified background color):
+-ka 0.25 0.1 0.05 -kd 0.65 0.2 0.01 -ks 1 1 1 -sp 64 -dl -1 -1 -1 1 1 1 -ts 3 5 -bgc 0.25 0.25 0.25</p>
 <a href="toon1.jpg"><img width="200" height="200" src="toon1.jpg" /></a>
+
+<p>Toon shader with thick red outline:
+-ka 0.25 0.1 0.05 -kd 0 0 0.8 -ks 1 1 1 -sp 64 -dl -0.8 -1.3 -0.7 1 1 1 -ts 7 20 -bgc 0.1 0.1 0.1 -tsc 0.4 0 0.05</p>
 <a href="toon2.jpg"><img widht="200" height="200" src="toon2.jpg" /></a>
+
+<p>Anisotropic highlights:
+-ka 0.1 0.1 0.1 -kd 0 0 0.8 -ks 1 1 1 -dl -0.8 -0.8 -1.2 1 1 1 -an 0.1 0.8</p>
 <a href="aniso1.jpg"><img width="200" height="200" src="aniso1.jpg" /></a>
+
+<p>Anisotropic higlights + toon shading:
+-ka 0.1 0.1 0.1 -kd 0 0 0.8 -ks 1 1 1 -dl -0.8 -0.8 -1.2 1 1 1 -an 0.2 3 -ts 4 5</p>
 <a href="aniso2.jpg"><img widht="200" height="200" src="aniso2.jpg" /></a>
+
+<p>Texture mapping, diffuse only:
+-ka 0.1 0.1 0.1 -kd 0 0.6 0.3 -ks 1 1 1 -dl -0.8 -0.8 -1.2 1 1 1 -sp 64 -dtex texture/texture_stone.png</p>
 <a href="tex1.jpg"><img width="200" height="200" src="tex1.jpg" /></a>
+
+<p>Texture mapping diffuse and specular:
+-ka 0.05 0.05 0.1 -kd 1 1 0 -ks 1 1 1 -dl -0.8 -0.8 -1.2 1 1 1 -dl -0.5 0.3 -1 1 1 1 -sp 64 -dtex texture/texture_smile.png -stex texture/texture_smile.png</p>
 <a href="tex2.jpg"><img widht="200" height="200" src="tex2.jpg" /></a>
+
+<p>Bump mapping:
+-ka 0.05 0.05 0.05 -kd 0.75 0.75 0.75 -ks 1 1 1 -dl -0.8 -0.8 -1.2 1 0 1 -dl 0.8 -0.8 -1.2 1 1 0 -sp 128 -bump texture/bump_grain.png</p>
 <a href="bump.jpg"><img widht="200" height="200" src="bump.jpg" /></a>
+
+<p>Bump and texture mapping:
+-ka 0.05 0.05 0.05 -kd 0.75 0.75 0.75 -ks 1 1 1 -pl -1 -2 3 1 0.9 0 -pl -2 3 1 0 1 0.9 -pl 3 -2 1 0.9 0 1 -sp 128 -bump texture/bump_grain.png -dtex texture/texture_stone2.png</p>
 <a href="bump_tex.jpg"><img width="200" height="200" src="bump_tex.jpg" /></a>
 
 </body>
