@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Assignment 2: Raytracer</title>
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+
+    <style>
+    .toggle{text-decoration: underline;}
+    .img{width:300px;height:300px;}
+    .label{font-weight:bold;margin-bottom: 0px;margin-right:3px;}
+    .arguments{margin-top: 0px;}
+    </style>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+    function toggleVisibility(spanEl, targetId) {
+    if ($(targetId).is(':visible')) {
+      $(targetId).fadeOut('fast');
+      spanEl.innerHTML = 'Show Details';
+    } else {
+      $(targetId).fadeIn('fast');
+      spanEl.innerHTML = 'Hide Details';
+    }
+    }
+
+    function hideAll() {
+      $(".details").hide();
+      $(".toggle").text("Show Details");
+    }
+    </script>
+</head>
+
+<body onload="hideAll()">
+<h1>Assignment 2: Raytracer</h1>
+
+Created by <a href="http://www-inst.eecs.berkeley.edu/~cs184-ah">Jeffrey Dong</a> and <a href="http://www-inst.eecs.berkeley.edu/~cs184-ai">Roger Chen</a>.
+
+<p>Click 'Show Details' for more information, and click on the pictures for a larger image.</p>
+
+<h2>Simple Sphere</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_01')">Show Details</a>
+<div class="details" id="details_01">
+  <p><span class="label">Render Time:</span>448ms</p>
+  <p><span class="label">Comments:</span>Simple sphere with specular, diffuse, and ambient shading.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 2 1 -1 2 -1 1 2 1 1 2
+  mat .2 .2 .18 0.5 0.5 0.45 0.5 0.5 0.45 3 0 0 0
+  ltp 2 2 2 1 1 1
+  sph 0 0 -3 1
+  xfz</pre>
+</div>
+<a href="01.png"><img class="img" src="01.png" /></a>
+
+<h2>Lengthened Ellipsoid</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_02')">Hide Details</a>
+<div class="details" id="details_02">
+  <p><span class="label">Render Time:</span>616ms</p>
+  <p><span class="label">Comments:</span>This was achieved using 
+  the Sphere primitive and a xfs (scaling) transformation.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 2 1 -1 2 -1 1 2 1 1 2
+  mat .2 .2 .18 0.5 0.5 0.45 0.5 0.5 0.45 3 0 0 0
+  ltp 2 2 2 1 1 1
+  xfs 0.8 1.2 1
+  sph 0 0 0 1
+  xfz</pre>
+</div>
+<a href="02.png"><img class="img" src="02.png" /></a>
+
+<h2>Arbitrarily Oriented Ellipsoid</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_03')">Hide Details</a>
+<div class="details" id="details_03">
+  <p><span class="label">Render Time:</span>541ms</p>
+  <p><span class="label">Comments:</span>
+  This was achieved using the Sphere primitive, an xfs (scaling)
+  transformation, and a xfr (rotation) transformation, and a xft
+  (translation) transformation.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 2 1 -1 2 -1 1 2 1 1 2
+  mat .2 .2 .18 0.5 0.5 0.45 0.5 0.5 0.45 20 0 0 0
+  ltp 2 2 2 1 1 1
+  xft 0.2 -1.2 -0.9
+  xfr 15 18 21
+  xfs 0.8 1.2 1
+  sph 0 0 0 1
+  xfz</pre>
+</div>
+<a href="03.png"><img class="img" src="03.png" /></a>
+
+<h2>Polygons</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_04')">Hide Details</a>
+<div class="details" id="details_04">
+  <p><span class="label">Render Time:</span>2300ms</p>
+  <p><span class="label">Comments:</span>Polygons are from the .obj file. Normals were not provided,
+  so they were inferred from the cross product AB x AC.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 1 0   1 1 1   0
+
+  mat .2 .2 .15 0.7 0.7 0.65 0.5 0.5 0.45 20 0 0 0
+  obj "images/obj/fivetriangles.obj"
+
+  mat 0 .2 .2 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="04.png"><img class="img" src="04.png" /></a>
+
+<h2>Polygons with Phong Shading</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_05')">Hide Details</a>
+<div class="details" id="details_05">
+  <p><span class="label">Render Time:</span>2428ms</p>
+  <p><span class="label">Comments:</span>Vertex normals are provided in the .obj files. The Phong shader
+  interpolates normals at each intersection point. The shading itself
+  is performed with a combination of ambient, diffuse, and specular
+  terms.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 1 0   1 1 1   0
+
+  mat .2 .2 .15 0.7 0.7 0.65 0.5 0.5 0.45 20 0 0 0
+  obj "images/obj/sixtriangles.obj"
+
+  mat .05 .2 .4 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="05.png"><img class="img" src="05.png" /></a>
+
+<h2>Shadows</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_06')">Hide Details</a>
+<div class="details" id="details_06">
+  <p><span class="label">Render Time:</span>2881ms</p>
+  <p><span class="label">Comments:</span>Computes shadows.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 1 0   1 1 1   0
+
+  mat .15 .2 .2 0.65 0.7 0.7 0.45 0.5 0.5 20 0 0 0
+  sph 0.1 0.1 -4 0.75
+
+  mat .2 .15 .2 0.7 0.65 0.7 0.5 0.45 0.5 20 0 0 0
+  sph 0 0 -6 1.5
+
+  mat .2 .2 .15 0.7 0.7 0.65 0.5 0.5 0.45 20 0 0 0
+  sph 0.2 0.2 -3 0.325
+
+  mat .15 0.05 0.05 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="06.png"><img class="img" src="06.png" /></a>
+
+<h2>Reflections</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_07')">Hide Details</a>
+<div class="details" id="details_07">
+  <p><span class="label">Render Time:</span>5313ms</p>
+  <p><span class="label">Comments:</span>Our max reflection recursion depth was set to 4.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 1 0   1 1 1   0
+
+  mat .2 .15 .2 0.7 0.65 0.7 0.5 0.45 0.5 20 0.25 0.25 0.25
+
+  sph 0 1 -4 0.5
+  sph 0.866 0.5 -4 0.5
+  sph -0.866 0.5 -4 0.5
+  sph 0 -1 -4 0.5
+  sph -0.866 -0.5 -4 0.5
+  sph 0.866 -0.5 -4 0.5
+  sph 0 0 -4 0.5</pre>
+</div>
+<a href="07.png"><img class="img" src="07.png" /></a>
+
+<h2>Transformed Reflections</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_08')">Hide Details</a>
+<div class="details" id="details_08">
+  <p><span class="label">Render Time:</span>2705ms</p>
+  <p><span class="label">Comments:</span>We applied a rotation, a scale, an inverse rotation. Then, we
+  applied a translation, a rotation, and an inverse translation.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 1 0   1 1 1   0
+
+  mat .2 .15 .2 0.7 0.65 0.7 0.5 0.45 0.5 20 0.25 0.25 0.25
+
+  xft 0 0 -4
+  xfr -60 0 0
+  xft 0 0 4
+  xfr 0 0 20
+  xfs 1 0.5 1
+  xfr 0 0 -20
+
+  sph 0 1 -4 0.5
+  sph 0.866 0.5 -4 0.5
+  sph -0.866 0.5 -4 0.5
+  sph 0 -1 -4 0.5
+  sph -0.866 -0.5 -4 0.5
+  sph 0.866 -0.5 -4 0.5</pre>
+</div>
+<a href="08.png"><img class="img" src="08.png" /></a>
+
+<h2>Point Lights</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_09')">Hide Details</a>
+<div class="details" id="details_09">
+  <p><span class="label">Render Time:</span>3778ms</p>
+  <p><span class="label">Comments:</span>There are two point lights (left and right). The bottom sphere
+  is closer to the camera, which is why it appears bigger and is
+  shaded slightly differently.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltp   1 2 -3  0.5 0.5 0.5  0
+  ltp   -1 2 -3  0.5 0.5 0.5  0
+
+  mat .15 .2 .2 0.65 0.7 0.7 0 0 0 1 0 0 0
+
+  sph 0 0.65 -4 0.5
+  sph 0 -0.65 -2.5 0.5
+
+  mat 0.3 0.3 0.1 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="09.png"><img class="img" src="09.png" /></a>
+
+<h2>Directional Lights</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_10')">Hide Details</a>
+<div class="details" id="details_10">
+  <p><span class="label">Render Time:</span>2841ms</p>
+  <p><span class="label">Comments:</span>There is one directional light coming from the bottom (pink) and
+  one directional light coming from the upper left (yellow).</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+  ltd   0 1 0   1 0 1
+  ltd   1 -1 0   1 1 0
+
+  mat .15 .2 .2 0.65 0.7 0.7 0 0 0 1 0 0 0
+
+  sph 0 0.65 -2.5 0.5
+  sph 0 -0.65 -4 0.5
+
+  mat 0.2 0.2 0.05 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="10.png"><img class="img" src="10.png" /></a>
+
+<h2>Point Lights with Falloff</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_11')">Hide Details</a>
+<div class="details" id="details_11">
+  <p><span class="label">Render Time:</span>4923ms</p>
+  <p><span class="label">Comments:</span>There are three point lights: no falloff (yellow), linear falloff (turquoise), 
+  and quadratic falloff (violet).</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+
+  ltp   0 -3 -3  0.5 0.5 0  0
+  ltp   2 2 -3  0 1 1  1
+  ltp   -2 2 -3  1 0 1  2
+
+  mat .2 .2 .2 0.7 0.7 0.7 0 0 0 1 0 0 0
+
+  sph 0 0.65 -4 0.5
+  sph 0 -0.65 -2.5 0.5
+
+  mat 0.3 0.3 0.1 0 0 0 0 0 0 0 0 0 0
+  obj "images/obj/background.obj"</pre>
+</div>
+<a href="11.png"><img class="img" src="11.png" /></a>
+
+<h2>Putting it all Together</h2>
+<p class="toggle" onclick="toggleVisibility(this, '#details_12')">Hide Details</a>
+<div class="details" id="details_12">
+  <p><span class="label">Render Time:</span>21155ms</p>
+  <p><span class="label">Comments:</span>There are two mirrors, one in front and one behind the camera. There
+  are 8 spheres in front of the camera, which are reflected back and
+  forth by the mirrors, to a maximum reflection depth of 4.</p>
+  <p class="label">Arguments:</p>
+  <pre class="arguments">
+  cam 0 0 4 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1
+
+  ltp   0 0 2  0.5 0.5 0  0
+  ltp   2 2 2  0 1 1  1
+  ltp   -2 2 2  1 0 1  2
+
+  mat 0 0 0 .01 .01 .01 0.5 0.5 0.5 50 1 1 1
+  tri 2 2 -5 -2 2 -5 -2 -2 -5
+  tri -2 -2 -5 2 -2 -5 2 2 -5
+
+  tri 2 2 5 -2 -2 5 -2 2 5
+  tri -2 -2 5 2 2 5 2 -2 5
+
+  mat .2 .2 .2 0.7 0.7 0.7 0 0 0 1 0 0 0
+  sph -2 -2 0 0.4
+  sph -2 0 0 0.4
+  sph -2 2 0 0.4
+  sph 0 2 0 0.4
+  sph 0 -2 0 0.4
+  sph 2 -2 0 0.4
+  sph 2 0 0 0.4
+  sph 2 2 0 0.4</pre>
+</div>
+<a href="12.png"><img class="img" src="12.png" /></a>
+
+</body>
+</html>
