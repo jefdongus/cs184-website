@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Assignment 3: Tessellation</title>
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+
+    <style>
+    .toggle{text-decoration: underline;}
+    .img{width:500px;height:auto;}
+    </style>
+</head>
+
+<body>
+<h1>Assignment 3: Tessellation</h1>
+
+Created by <a href="http://www-inst.eecs.berkeley.edu/~cs184-ah">Jeffrey Dong</a> and <a href="http://www-inst.eecs.berkeley.edu/~cs184-ai">Roger Chen</a>.
+
+<p>Click 'Show Details' for more information, and click on the pictures for a larger image.</p>
+
+<h2>Custom shape</h2>
+<pre>./teapot <a href="box.bez.txt">examples/box.bez</a> 0.1</pre>
+<a href="01.png"><img class="img" src="01.png" /></a>
+
+<h2>Uniform tessellation</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="02.png"><img class="img" src="02.png" /></a>
+
+<h2>Uniform tessellation (wireframe)</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="03.png"><img class="img" src="03.png" /></a>
+
+<h2>Uniform tessellation (flat shading)</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="04.png"><img class="img" src="04.png" /></a>
+
+<h2>Rotations</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="05.png"><img class="img" src="05.png" /></a>
+
+<h2>Translation</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="06.png"><img class="img" src="06.png" /></a>
+
+<h2>Zoom</h2>
+<pre>./teapot examples/teapot.bez 0.1</pre>
+<a href="07.png"><img class="img" src="07.png" /></a>
+
+<h2>Adaptive tessellation (wireframe)</h2>
+<pre>./teapot examples/teapot.bez 0.05 -a</pre>
+<a href="08.png"><img class="img" src="08.png" /></a>
+
+<h2>Adaptive tesselation</h2>
+<pre>./teapot examples/teapot.bez 0.01 -a</pre>
+<a href="09.png"><img class="img" src="09.png" /></a>
+
+<h2>Adaptive tesselation (flat shading)</h2>
+<pre>./teapot examples/teapot.bez 0.01 -a</pre>
+<a href="10.png"><img class="img" src="10.png" /></a>
+
+</body>
+</html>
